@@ -21,8 +21,13 @@ Any other server that serves the same JSON shape works too.
 
 ## Install
 
-**HACS:** add this repository as a custom repository (category *Integration*),
-install *Valheim Server Status*, restart Home Assistant.
+**HACS:**
+
+[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=AndrewBereza&repository=HAValheimServerStatus&category=integration)
+
+Or by hand: **HACS > ⋮ > Custom repositories**, add
+`https://github.com/AndrewBereza/HAValheimServerStatus` with type *Integration*,
+then download *Valheim Server Status* and restart Home Assistant.
 
 **Manual:** copy `custom_components/valheim_status` into your
 `<config>/custom_components/` folder and restart.
