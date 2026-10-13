@@ -1,0 +1,12 @@
+{
+  "domain": "valheim_status",
+  "name": "Valheim Server Status",
+  "codeowners": ["@AndrewBereza"],
+  "config_flow": true,
+  "documentation": "https://github.com/AndrewBereza/HAValheimServerStatus",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/AndrewBereza/HAValheimServerStatus/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

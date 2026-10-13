@@ -1,0 +1,56 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Valheim server status",
+        "description": "Point Home Assistant at the status.json served by your Valheim server (for example the STATUS_HTTP option of lloesche/valheim-server-docker).",
+        "data": {
+          "name": "Name",
+          "host": "Host",
+          "port": "Status HTTP port",
+          "path": "Path to status.json",
+          "ssl": "Use HTTPS",
+          "verify_ssl": "Verify SSL certificate"
+        },
+        "data_description": {
+          "host": "Hostname or IP address of the server running the status web server.",
+          "port": "Port of the status web server (STATUS_HTTP_PORT, 80 by default), not the game port."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not download status.json from that address.",
+      "invalid_response": "The address answered, but not with a Valheim status.json.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This status.json is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "scan_interval": "Poll interval (seconds)",
+          "stale_after": "Treat status as offline when older than (seconds)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "online": { "name": "Online" },
+      "password_protected": { "name": "Password protected" },
+      "vac_enabled": { "name": "VAC enabled" }
+    },
+    "sensor": {
+      "players": { "name": "Players" },
+      "server_name": { "name": "Server name" },
+      "version": { "name": "Version" },
+      "last_status_update": { "name": "Last status update" },
+      "status_error": { "name": "Status error" },
+      "game_port": { "name": "Game port" },
+      "steam_id": { "name": "Steam ID" }
+    }
+  }
+}

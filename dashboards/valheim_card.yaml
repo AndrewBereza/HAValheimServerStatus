@@ -1,0 +1,68 @@
+# Valheim server card for a Home Assistant dashboard.
+# Paste into: Dashboard > Edit > Add card > Manual.
+# Entity ids assume the integration was added with the default name "Valheim".
+# If you picked another name, replace "valheim_" with your slug (e.g. "my_world_").
+type: vertical-stack
+cards:
+  - type: tile
+    entity: binary_sensor.valheim_online
+    name: Valheim server
+    vertical: false
+    state_content:
+      - state
+      - last_changed
+
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: binary_sensor.valheim_online
+        state: "off"
+    card:
+      type: markdown
+      content: |
+        **Server is offline.**
+        {% set err = state_attr('binary_sensor.valheim_online', 'error') %}
+        {% if state_attr('binary_sensor.valheim_online', 'stale') and not err %}
+        status.json has not been updated recently.
+        {% elif err %}`{{ err }}`{% endif %}
+
+  - type: glance
+    show_state: true
+    entities:
+      - entity: sensor.valheim_players
+        name: Players
+      - entity: sensor.valheim_version
+        name: Version
+      - entity: binary_sensor.valheim_password_protected
+        name: Password
+
+  - type: markdown
+    title: Who's online
+    content: |
+      {% set players = state_attr('sensor.valheim_players', 'players') or [] %}
+      {% if players | length == 0 %}
+      Nobody is playing right now.
+      {% else %}
+      | # | Player | Session |
+      |---|---|---|
+      {%- for p in players | sort(attribute='duration_minutes', reverse=true) %}
+      | {{ loop.index }} | {{ p.name or 'Viking' }} | {{ (p.duration_minutes // 60) | int }}h {{ (p.duration_minutes % 60) | round(0) | int }}m |
+      {%- endfor %}
+      {% endif %}
+
+  - type: history-graph
+    title: Players (last 24 h)
+    hours_to_show: 24
+    entities:
+      - entity: sensor.valheim_players
+        name: Players
+
+  - type: entities
+    title: Server details
+    state_color: true
+    entities:
+      - entity: sensor.valheim_server_name
+      - entity: sensor.valheim_version
+      - entity: sensor.valheim_last_status_update
+        format: relative
+      - entity: sensor.valheim_status_error

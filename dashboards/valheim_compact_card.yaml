@@ -1,0 +1,12 @@
+# Compact Valheim widget: online state and player count side by side.
+# Good for an overview dashboard. Same entity id note as valheim_card.yaml.
+type: horizontal-stack
+cards:
+  - type: tile
+    entity: binary_sensor.valheim_online
+    name: Valheim
+    icon: mdi:sword-cross
+  - type: tile
+    entity: sensor.valheim_players
+    name: Vikings online
+    color: green

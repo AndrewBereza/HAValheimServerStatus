@@ -1,0 +1,17 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "online": { "default": "mdi:sword-cross" },
+      "password_protected": { "default": "mdi:lock" },
+      "vac_enabled": { "default": "mdi:shield-check" }
+    },
+    "sensor": {
+      "players": { "default": "mdi:account-group" },
+      "server_name": { "default": "mdi:server" },
+      "version": { "default": "mdi:tag" },
+      "status_error": { "default": "mdi:alert-circle-outline" },
+      "game_port": { "default": "mdi:ethernet" },
+      "steam_id": { "default": "mdi:steam" }
+    }
+  }
+}
